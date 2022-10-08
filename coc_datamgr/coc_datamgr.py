@@ -37,7 +37,7 @@ class AriXClashDataMgr(commands.Cog):
         self.config.register_global(**default_global)
         self.config.register_guild(**default_guild)
 
-    @commands.group(name="datapath",autohelp=False)
+    @commands.group(name="cdatapath",autohelp=False)
     @commands.admin_or_permissions(administrator=True)
     async def cdatapath(self, ctx,path=""):
         """Retrieves the data path location for Clash data files."""
@@ -56,7 +56,7 @@ class AriXClashDataMgr(commands.Cog):
                 embed = await clash_embed(ctx=ctx,message=f"The global data path is currently set to ```{dataPath}```.")
                 return await ctx.send(embed=embed)
 
-    @datapath.command(name="set")
+    @cdatapath.command(name="set")
     async def cdatapathset(self,ctx, path=""):
         """Sets the data path location."""
         try:
