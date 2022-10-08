@@ -128,15 +128,16 @@ class AriXClashDataMgr(commands.Cog):
                 logChannel = await self.config.guild(ctx.guild).logchannel()
 
                 try:
-                    logChannel = self.bot.get_channel(logChannel).mention
+                    channelObject = self.bot.get_channel(logChannel)
+                    channelMention = channelObject.mention
                 except:
-                    logChannel = "Invalid Channel"
+                    channelMention = "Invalid Channel"
                 
             except:
                 embed = await clash_embed(ctx=ctx,message=f"Error encountered in retrieving server settings.",color="fail")
                 return await ctx.send(embed=embed)
             else:
-                embed = await clash_embed(ctx=ctx,message=f"**Send Logs?:** {logsBool}\n**Log Channel:** {logChannel}")
+                embed = await clash_embed(ctx=ctx,message=f"**Send Logs?:** {logsBool}\n**Log Channel:** {channelMention}")
                 return await ctx.send(embed=embed)
 
     @serversettings.command(name="setlogs")
@@ -152,11 +153,12 @@ class AriXClashDataMgr(commands.Cog):
             logChannel = await self.config.guild(ctx.guild).logchannel()
             
             try:
-                logChannel = self.bot.get_channel(logChannel).mention
+                channelObject = self.bot.get_channel(logChannel)
+                channelMention = channelObject.mention
             except:
-                logChannel = "Invalid Channel"
+                channelMention = "Invalid Channel"
 
-            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {logChannel}")
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {channelMention}")
             return await ctx.send(embed=embed)
         except:
             embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
@@ -174,11 +176,12 @@ class AriXClashDataMgr(commands.Cog):
             logChannel = await self.config.guild(ctx.guild).logchannel()
             
             try:
-                logChannel = self.bot.get_channel(logChannel).mention
+                channelObject = self.bot.get_channel(logChannel)
+                channelMention = channelObject.mention
             except:
-                logChannel = "Invalid Channel"
-                
-            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {logChannel}")
+                channelMention = "Invalid Channel"
+
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {channelMention}")
             return await ctx.send(embed=embed)
         except:
             embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
