@@ -4,7 +4,7 @@ class AriXClashDataMgr(commands.Cog):
     """AriX Clash of Clans Data Management"""
 
     def __init__(self, bot):
-        self.bot = bot
+        bot = self.bot
 
     @commands.command()
     async def com1(self, ctx):
