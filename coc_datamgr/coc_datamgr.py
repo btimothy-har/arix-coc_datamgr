@@ -41,7 +41,7 @@ class AriXClashDataMgr(commands.Cog):
 
     @commands.group(name="cdatapath",autohelp=False)
     @commands.admin_or_permissions(administrator=True)
-    async def cdatapath(self, ctx,path=""):
+    async def cdatapath(self, ctx):
         """Retrieves the data path location for Clash data files."""
 
         if not ctx.invoked_subcommand:
@@ -55,8 +55,12 @@ class AriXClashDataMgr(commands.Cog):
                 embed = await no_path()
                 return await ctx.send(embed=embed)
             else:
-                embed = await clash_embed(ctx=ctx,message=f"The global data path is currently set to ```{dataPath}```.")
-                return await ctx.send(embed=embed)
+                if dataPath == "":
+                    embed = await no_path()
+                    return await ctx.send(embed=embed)
+                else:
+                    embed = await clash_embed(ctx=ctx,message=f"The global data path is currently set to ```{dataPath}```.")
+                    return await ctx.send(embed=embed)
 
     @cdatapath.command(name="set")
     async def cdatapathset(self,ctx, path=""):
@@ -74,7 +78,7 @@ class AriXClashDataMgr(commands.Cog):
 
     @commands.group(name="apikey",autohelp=False)
     @commands.admin_or_permissions(administrator=True)
-    async def apikey(self, ctx,path=""):
+    async def apikey(self, ctx):
         """Retrieves the current API Key for the Clash of Clans API."""
 
         if not ctx.invoked_subcommand:
@@ -88,8 +92,12 @@ class AriXClashDataMgr(commands.Cog):
                 embed = await no_key()
                 return await ctx.send(embed=embed)
             else:
-                embed = await clash_embed(ctx=ctx,message=f"The API Key currently in use is ```{apiKey}```.")
-                return await ctx.send(embed=embed)
+                if apiKey == "":
+                    embed = await no_path()
+                    return await ctx.send(embed=embed)
+                else:
+                    embed = await clash_embed(ctx=ctx,message=f"The API Key currently in use is ```{apiKey}```.")
+                    return await ctx.send(embed=embed)
 
     @apikey.command(name="set")
     async def apikeyset(self, ctx, key=""):
