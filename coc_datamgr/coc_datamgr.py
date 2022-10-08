@@ -40,7 +40,7 @@ class AriXClashDataMgr(commands.Cog):
         self.config.register_guild(**default_guild)
 
     @commands.group(name="cdatapath",autohelp=False)
-    @commands.admin_or_permissions(administrator=True)
+    @commands.isowner()
     async def cdatapath(self, ctx):
         """Retrieves the data path location for Clash data files."""
 
@@ -63,6 +63,7 @@ class AriXClashDataMgr(commands.Cog):
                     return await ctx.send(embed=embed)
 
     @cdatapath.command(name="set")
+    @commands.isowner()
     async def cdatapathset(self,ctx, path=""):
         """Sets the data path location."""
         try:
@@ -77,7 +78,7 @@ class AriXClashDataMgr(commands.Cog):
             return await ctx.send(embed=embed)
 
     @commands.group(name="apikey",autohelp=False)
-    @commands.admin_or_permissions(administrator=True)
+    @commands.isowner()
     async def apikey(self, ctx):
         """Retrieves the current API Key for the Clash of Clans API."""
 
@@ -100,6 +101,7 @@ class AriXClashDataMgr(commands.Cog):
                     return await ctx.send(embed=embed)
 
     @apikey.command(name="set")
+    @commands.isowner()
     async def apikeyset(self, ctx, key=""):
         """Sets the API Key for the Clash of Clans API."""
 
@@ -112,4 +114,54 @@ class AriXClashDataMgr(commands.Cog):
             return await ctx.send(embed=embed)
         except:
             embed = await clash_embed(ctx=ctx,message=f"Error setting API Key.",color="fail")
+            return await ctx.send(embed=embed)
+
+    @commands.group(name="serverset",autohelp=False)
+    @commands.admin_or_permissions(administrator=True)
+    async def serversettings(self,ctx):
+        """Configure settings for the current server."""
+
+        if not ctx.invoked_subcommand:
+            try:
+                logsBool = await self.config.guild(ctx.guild).postlogs()
+                logChannel = await self.config.guild(ctx.guild).logchannel()
+            except:
+                embed = await clash_embed(ctx=ctx,message=f"Error encountered in retrieving server settings.",color="fail")
+                return await ctx.send(embed=embed)
+            else:
+                embed = await clash_embed(ctx=ctx,message=f"**Send Logs?:** {logsBool}\n**Log Channel: #{logChannel}")
+                return await ctx.send(embed=embed)
+
+    @serverset.command(name="setlogs"):
+    @commands.admin_or_permissions(administrator=True)
+    async def setlogs(self, ctx, boolset:Boolean):
+        """Configure whether to send data logs in the current server."""
+
+        try:
+            newSetting = boolset
+            await self.config.guild(ctx.guild).postlogs.set(newSetting)
+
+            logsBool = await self.config.guild(ctx.guild).postlogs()
+            logChannel = await self.config.guild(ctx.guild).logchannel()
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: #{logChannel}")
+            return await ctx.send(embed=embed)
+        except:
+            embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
+            return await ctx.send(embed=embed)
+
+    @serverset.command(name="setchannel"):
+    @commands.admin_or_permissions(administrator=True)
+    async def setchannel(self, ctx, channelid:int):
+        """Configure channel to send log messages in."""
+
+        try:
+            newChannel = channelid
+            await self.config.guild(ctx.guild).logchannel.set(newChannel)
+
+            logsBool = await self.config.guild(ctx.guild).postlogs()
+            logChannel = await self.config.guild(ctx.guild).logchannel()
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: #{logChannel}")
+            return await ctx.send(embed=embed)
+        except:
+            embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
             return await ctx.send(embed=embed)
