@@ -132,7 +132,7 @@ class AriXClashDataMgr(commands.Cog):
                 embed = await clash_embed(ctx=ctx,message=f"**Send Logs?:** {logsBool}\n**Log Channel: #{logChannel}")
                 return await ctx.send(embed=embed)
 
-    @serverset.command(name="setlogs"):
+    @serverset.command(name="setlogs")
     @commands.admin_or_permissions(administrator=True)
     async def setlogs(self, ctx, boolset:Boolean):
         """Configure whether to send data logs in the current server."""
@@ -149,7 +149,7 @@ class AriXClashDataMgr(commands.Cog):
             embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
             return await ctx.send(embed=embed)
 
-    @serverset.command(name="setchannel"):
+    @serverset.command(name="setchannel")
     @commands.admin_or_permissions(administrator=True)
     async def setchannel(self, ctx, channelid:int):
         """Configure channel to send log messages in."""
