@@ -1,4 +1,5 @@
 from redbot.core import Config, commands
+from discord.utils import get
 
 import discord
 
@@ -33,7 +34,7 @@ class AriXClashDataMgr(commands.Cog):
             }
         default_guild = {
             "postlogs":False,
-            "logchannel":"",
+            "logchannel":None,
             }
 
         self.config.register_global(**default_global)
@@ -125,7 +126,12 @@ class AriXClashDataMgr(commands.Cog):
             try:
                 logsBool = await self.config.guild(ctx.guild).postlogs()
                 logChannel = await self.config.guild(ctx.guild).logchannel()
-                logChannel = f"#{logChannel}"
+
+                if not isinstance(logChannel,discord.Channel):
+                    logChannelID = ""
+                else:
+                    logChannel = logChannel.mention
+                
             except:
                 embed = await clash_embed(ctx=ctx,message=f"Error encountered in retrieving server settings.",color="fail")
                 return await ctx.send(embed=embed)
@@ -144,7 +150,11 @@ class AriXClashDataMgr(commands.Cog):
 
             logsBool = await self.config.guild(ctx.guild).postlogs()
             logChannel = await self.config.guild(ctx.guild).logchannel()
-            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: #{logChannel}")
+            if not isinstance(logChannel,discord.Channel):
+                logChannelID = ""
+            else:
+                logChannel = logChannel.mention
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {logChannel}")
             return await ctx.send(embed=embed)
         except:
             embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
@@ -152,16 +162,19 @@ class AriXClashDataMgr(commands.Cog):
 
     @serversettings.command(name="setchannel")
     @commands.admin_or_permissions(administrator=True)
-    async def setchannel(self, ctx, channelid:int):
+    async def setchannel(self, ctx, channel:discord.Channel):
         """Configure channel to send log messages in."""
 
         try:
-            newChannel = channelid
-            await self.config.guild(ctx.guild).logchannel.set(newChannel)
+            await self.config.guild(ctx.guild).logchannel.set(discord.Channel)
 
             logsBool = await self.config.guild(ctx.guild).postlogs()
             logChannel = await self.config.guild(ctx.guild).logchannel()
-            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: #{logChannel}")
+            if not isinstance(logChannel,discord.Channel):
+                logChannelID = ""
+            else:
+                logChannel = logChannel.mention
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {logChannel}")
             return await ctx.send(embed=embed)
         except:
             embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
