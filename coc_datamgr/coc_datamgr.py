@@ -128,7 +128,7 @@ class AriXClashDataMgr(commands.Cog):
                 logChannel = await self.config.guild(ctx.guild).logchannel()
 
                 try:
-                    channelObject = self.get_channel(logChannel)
+                    channelObject = ctx.guild.get_channel(logChannel)
                     channelMention = f"<#{channelObject.id}>"
                 except:
                     channelMention = "Invalid Channel"
@@ -153,7 +153,7 @@ class AriXClashDataMgr(commands.Cog):
             logChannel = await self.config.guild(ctx.guild).logchannel()
             
             try:
-                channelObject = self.get_channel(logChannel)
+                channelObject = ctx.guild.get_channel(logChannel)
                 channelMention = f"<#{channelObject.id}>"
             except:
                 channelMention = "Invalid Channel"
@@ -176,7 +176,7 @@ class AriXClashDataMgr(commands.Cog):
             logChannel = await self.config.guild(ctx.guild).logchannel()
             
             try:
-                channelObject = self.get_channel(logChannel)
+                channelObject = ctx.guild.get_channel(logChannel)
                 channelMention = f"<#{channelObject.id}>"
             except:
                 channelMention = "Invalid Channel"
