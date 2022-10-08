@@ -1,6 +1,6 @@
 from redbot.core import commands
 
-class AriXCOC_DataMgr(commands.Cog):
+class AriXClashDataMgr(commands.Cog):
     """AriX Clash of Clans Data Management"""
 
     def __init__(self, bot):
