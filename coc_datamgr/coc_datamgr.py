@@ -93,7 +93,7 @@ class AriXClashDataMgr(commands.Cog):
                 return await ctx.send(embed=embed)
             else:
                 if apiKey == "":
-                    embed = await no_path()
+                    embed = await no_key()
                     return await ctx.send(embed=embed)
                 else:
                     embed = await clash_embed(ctx=ctx,message=f"The API Key currently in use is ```{apiKey}```.")
