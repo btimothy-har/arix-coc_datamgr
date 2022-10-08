@@ -125,11 +125,12 @@ class AriXClashDataMgr(commands.Cog):
             try:
                 logsBool = await self.config.guild(ctx.guild).postlogs()
                 logChannel = await self.config.guild(ctx.guild).logchannel()
+                logChannel = f"#{logChannel}"
             except:
                 embed = await clash_embed(ctx=ctx,message=f"Error encountered in retrieving server settings.",color="fail")
                 return await ctx.send(embed=embed)
             else:
-                embed = await clash_embed(ctx=ctx,message=f"**Send Logs?:** {logsBool}\n**Log Channel: #{logChannel}")
+                embed = await clash_embed(ctx=ctx,message=f"**Send Logs?:** {logsBool}\n**Log Channel:** {logChannel}")
                 return await ctx.send(embed=embed)
 
     @serversettings.command(name="setlogs")
