@@ -1,5 +1,7 @@
 from redbot.core import Config, commands
 
+import discord
+
 async def clash_embed(ctx, title=None, message=None, url=None, show_author=True, color=None):
     if not title:
         title = ""
