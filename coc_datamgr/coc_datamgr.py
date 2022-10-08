@@ -89,7 +89,7 @@ class AriXClashDataMgr(commands.Cog):
                 embed = await clash_embed(ctx=ctx,message=f"The API Key currently in use is ```{apiKey}```.")
                 return await ctx.send(embed=embed)
 
-    @apikey.command(name="set")
+    @apikey.command(name="set"):
     async def apikeyset(self, ctx, key="")
         """Sets the API Key for the Clash of Clans API."""
 
