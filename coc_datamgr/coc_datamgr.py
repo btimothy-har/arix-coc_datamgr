@@ -129,7 +129,7 @@ class AriXClashDataMgr(commands.Cog):
 
                 try:
                     channelObject = self.bot.get_channel(logChannel)
-                    channelMention = channelObject.mention
+                    channelMention = f"<#{channelObject.id}>"
                 except:
                     channelMention = "Invalid Channel"
                 
@@ -154,7 +154,7 @@ class AriXClashDataMgr(commands.Cog):
             
             try:
                 channelObject = self.bot.get_channel(logChannel)
-                channelMention = channelObject.mention
+                channelMention = f"<#{channelObject.id}>"
             except:
                 channelMention = "Invalid Channel"
 
@@ -177,7 +177,7 @@ class AriXClashDataMgr(commands.Cog):
             
             try:
                 channelObject = self.bot.get_channel(logChannel)
-                channelMention = channelObject.mention
+                channelMention = f"<#{channelObject.id}>"
             except:
                 channelMention = "Invalid Channel"
 
