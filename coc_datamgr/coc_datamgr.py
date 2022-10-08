@@ -40,7 +40,7 @@ class AriXClashDataMgr(commands.Cog):
         self.config.register_guild(**default_guild)
 
     @commands.group(name="cdatapath",autohelp=False)
-    @commands.isowner()
+    @commands.is_owner()
     async def cdatapath(self, ctx):
         """Retrieves the data path location for Clash data files."""
 
@@ -63,7 +63,7 @@ class AriXClashDataMgr(commands.Cog):
                     return await ctx.send(embed=embed)
 
     @cdatapath.command(name="set")
-    @commands.isowner()
+    @commands.is_owner()
     async def cdatapathset(self,ctx, path=""):
         """Sets the data path location."""
         try:
@@ -78,7 +78,7 @@ class AriXClashDataMgr(commands.Cog):
             return await ctx.send(embed=embed)
 
     @commands.group(name="apikey",autohelp=False)
-    @commands.isowner()
+    @commands.is_owner()
     async def apikey(self, ctx):
         """Retrieves the current API Key for the Clash of Clans API."""
 
@@ -101,7 +101,7 @@ class AriXClashDataMgr(commands.Cog):
                     return await ctx.send(embed=embed)
 
     @apikey.command(name="set")
-    @commands.isowner()
+    @commands.is_owner()
     async def apikeyset(self, ctx, key=""):
         """Sets the API Key for the Clash of Clans API."""
 
