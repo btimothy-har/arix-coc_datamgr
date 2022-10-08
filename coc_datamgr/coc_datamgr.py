@@ -39,7 +39,7 @@ class AriXClashDataMgr(commands.Cog):
 
     @commands.group(name="datapath",autohelp=False)
     @commands.admin_or_permissions(administrator=True)
-    async def datapath(self, ctx,path=""):
+    async def cdatapath(self, ctx,path=""):
         """Retrieves the data path location for Clash data files."""
 
         if not ctx.invoked_subcommand:
@@ -57,7 +57,7 @@ class AriXClashDataMgr(commands.Cog):
                 return await ctx.send(embed=embed)
 
     @datapath.command(name="set")
-    async def datapathset(self,ctx, path=""):
+    async def cdatapathset(self,ctx, path=""):
         """Sets the data path location."""
         try:
             newPath = path
