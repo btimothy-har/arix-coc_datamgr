@@ -158,7 +158,7 @@ class AriXClashDataMgr(commands.Cog):
             except:
                 channelMention = "Invalid Channel"
 
-            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {channelMention}")
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel:** {channelMention}")
             return await ctx.send(embed=embed)
         except:
             embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
@@ -181,7 +181,7 @@ class AriXClashDataMgr(commands.Cog):
             except:
                 channelMention = "Invalid Channel"
 
-            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel: {channelMention}")
+            embed = await clash_embed(ctx=ctx,title="Settings updated.",message=f"**Send Logs?:** {logsBool}\n**Log Channel:** {channelMention}")
             return await ctx.send(embed=embed)
         except:
             embed = await clash_embed(ctx=ctx,message=f"Error updating settings.",color="fail")
