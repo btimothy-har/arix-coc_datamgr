@@ -134,7 +134,7 @@ class AriXClashDataMgr(commands.Cog):
 
     @serversettings.command(name="setlogs")
     @commands.admin_or_permissions(administrator=True)
-    async def setlogs(self, ctx, boolset:Boolean):
+    async def setlogs(self, ctx, boolset:bool):
         """Configure whether to send data logs in the current server."""
 
         try:
