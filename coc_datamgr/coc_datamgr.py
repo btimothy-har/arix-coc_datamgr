@@ -230,7 +230,10 @@ class AriXClashDataMgr(commands.Cog):
             
         if not ctx.invoked_subcommand:
             currentClans,currentMembers = await get_current_alliance(self)
-            await ctx.send(f"Clan Set:{currentClans}")
+            if not len(currentClans) > 0:
+                return await ctx.send("No clans found.")
+
+            return await ctx.send(f"Clan Set:{currentClans}")
 
     @clansettings.command(name="add")
     @commands.admin_or_permissions(administrator=True)
