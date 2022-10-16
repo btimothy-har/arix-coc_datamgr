@@ -165,7 +165,7 @@ class AriXClashDataMgr(commands.Cog):
                 embed = await clash_embed(ctx=ctx,
                                     title=f"Settings for {ctx.guild.name}",
                                     message=f"**Send Logs?:** {logsBool}\n**Log Channel:** {channelMention}",
-                                    thumbnail=ctx.guild.icon.url)
+                                    thumbnail=ctx.guild.icon_url)
                 return await ctx.send(embed=embed)
 
     @serversettings.command(name="setlogs")
