@@ -597,7 +597,26 @@ class AriXClashDataMgr(commands.Cog):
     @commands.command(name="drefresh")
     async def data_update(self, ctx):
 
+        sendLogs = False
         newSeason = False
+
+        try:
+            logsBool = await self.config.guild(ctx.guild).postlogs()
+            sendLogs = logsBool
+        except:
+            pass
+
+        try:
+            logChannel = await self.config.guild(ctx.guild).logchannel()
+        except:
+            pass
+        else:
+            try:
+                logChannelO = ctx.guild.get_channel(logChannel)
+            except:
+                sendLogs = False
+                logChannelO = None
+
         successLog = []
         errLog = []
         t = time.time()
@@ -685,5 +704,6 @@ class AriXClashDataMgr(commands.Cog):
             name=f"**Member Updates Completed",
             value=f"{len(successLog)} records updated. {len(errLog)} errors encountered."+errStr,
             inline=False)
-
-        await ctx.send(embed=sEmbed)
+        
+        if sendLogs:
+            await logChannelO.send(embed=sEmbed)
