@@ -72,7 +72,7 @@ class AriXClashDataMgr(commands.Cog):
                                         message=f"**alliance.json**: {path.exists(self.cDirPath+'/alliance.json')}"
                                                 +f"\n**members.json**: {path.exists(self.cDirPath+'/members.json')}"
                                                 +f"\n**warlog.json**: {path.exists(self.cDirPath+'/warlog.json')}"
-                                                +f"\n**clangames.json**: {path.exists(self.cDirPath+'/clangames.json')}"
+                                                +f"\n**capitalraid.json**: {path.exists(self.cDirPath+'/capitalraid.json')}"
                                                 +f"\n\nRun `[p]datafiles init` to create any missing files.")
             await ctx.send(embed=embed)
 
@@ -125,7 +125,7 @@ class AriXClashDataMgr(commands.Cog):
         await datafile_save(self,'alliance',default_alliance)
         await datafile_save(self,'members',default_members)
         await datafile_save(self,'warlog',default_warlog)
-        await datafile_save(self,'clangames',default_capitalraid)
+        await datafile_save(self,'capitalraid',default_capitalraid)
             
         embed = await clash_embed(ctx=ctx,
                     title="All Data Files Reset.",
@@ -644,7 +644,7 @@ class AriXClashDataMgr(commands.Cog):
             with open(self.cDirPath+'/'+pSeason+'/warlog.json','x') as file:
                 json.dump(warlogJson,file,indent=2)
             with open(self.cDirPath+'/'+pSeason+'/capitalraid.json','x') as file:
-                json.dump(clangamesJson,file,indent=2)
+                json.dump(capitalraidJson,file,indent=2)
 
             default_alliance, default_members, default_warlog, default_capitalraid = await datafile_defaults()
             memberStatsJson = default_members
@@ -660,12 +660,12 @@ class AriXClashDataMgr(commands.Cog):
                 value=f"__Files Saved__"
                     + f"\n**{pSeason}/members.json**: {path.exists(self.cDirPath+'/'+pSeason+'/members.json')}"
                     + f"\n**{pSeason}/warlog.json**: {path.exists(self.cDirPath+'/'+pSeason+'/warlog.json')}"
-                    + f"\n**{pSeason}/clangames.json**: {path.exists(self.cDirPath+'/'+pSeason+'/clangames.json')}"
+                    + f"\n**{pSeason}/capitalraid.json**: {path.exists(self.cDirPath+'/'+pSeason+'/capitalraid.json')}"
                     + f"\n\u200b\n"
                     + f"__Files Created__"
                     + f"\n**members.json**: {path.exists(self.cDirPath+'/members.json')}"
                     + f"\n**warlog.json**: {path.exists(self.cDirPath+'/warlog.json')}"
-                    + f"\n**clangames.json**: {path.exists(self.cDirPath+'/clangames.json')}",
+                    + f"\n**capitalraid.json**: {path.exists(self.cDirPath+'/capitalraid.json')}",
                 inline=False)
 
         for tag, member in allianceJson['members'].items():
